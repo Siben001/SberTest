@@ -1,0 +1,69 @@
+<%@ page import="entities.Account" %><%--
+  Created by IntelliJ IDEA.
+  User: Екатерина
+  Date: 23.04.2018
+  Time: 2:13
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Account</title>
+</head>
+
+<body>
+<div>
+    <h1>Bank</h1>
+</div>
+
+<div>
+    <div>
+        <div>
+            <div>
+                <h2>Money Transfer</h2>
+            </div>
+
+            <form method="post">
+                <label>From:
+                    <input type="text" name="account_name_from"><br />
+                </label>
+                <label>To:
+                    <input type="text" name="account_name_to"><br />
+                </label>
+                <label>Sum for taking:
+                    <input type="float" name="sum"><br />
+                </label>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+    </div> <%
+        if (request.getAttribute("Error") != null) {
+            Integer err_num = (Integer) request.getAttribute("Error");
+            if (err_num == 1){
+                String acc_name = (String) request.getAttribute("Account");
+                out.println("<p>There is no " + acc_name + " account yet!</p>");
+            }else {
+                out.println("<p>Please, input sum in format: 123.3</p>");
+            }
+        }
+        else {
+            if (request.getAttribute("Account_from") != null) {
+                Account acc_from = (Account) request.getAttribute("Account_from");
+                Account acc_to = (Account) request.getAttribute("Account_to");
+                if (acc_from.getBalance() >= 0){
+                    out.println("Account: " + acc_from.getName());
+                    out.println("New Balance:" + acc_from.getBalance());
+                    out.println("Account: " + acc_to.getName());
+                    out.println("New Balance:" + acc_to.getBalance());}
+                    else {out.println("<p>There is not enough money on " + acc_from.getName() + " account!</p>");
+            }}}
+%>
+
+</div>
+
+<div>
+    <button onclick="location.href='/'">Back to main</button>
+</div>
+</body>
+</html>
