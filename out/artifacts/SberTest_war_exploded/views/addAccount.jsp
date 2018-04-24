@@ -26,25 +26,27 @@
             <label>AccountName:
                 <input type="text" name="account_name"><br />
             </label>
-            <button type="submit">Submit</button>
+            <button type="submit" name="submit">Submit</button>
         </form>
     </div>
     <%
+        String tag = "name=\"info\"";
         if (request.getAttribute("Error") != null){
+
             Integer err_num = (Integer) request.getAttribute("Error");
             if (err_num == 1){
-                out.println("<p>Account '" + request.getAttribute("Account") + "' is already exist!</p>"); }
+                out.println("<p " + tag + ">Account '" + request.getAttribute("Account") + "' is already exist!</p>"); }
                 else{
-                    out.println("<p>Please, enter account name</p>");
+                    out.println("<p " + tag + ">Please, enter account name</p>");
                 }
         } else if (request.getAttribute("Account") != null) {
-                out.println("<p>Account '" + request.getAttribute("Account") + "' added!</p>");
+                out.println("<p " + tag + ">Account '" + request.getAttribute("Account") + "' added!</p>");
             }
     %>
 </div>
 
 <div>
-    <button onclick="location.href='/'">Back to main</button>
+    <button name="back" onclick="location.href='/'">Back to main</button>
 </div>
 </body>
 </html>

@@ -27,19 +27,20 @@
                 <label>AccountName:
                     <input type="text" name="account_name"><br />
                 </label>
-                <button type="submit">Submit</button>
+                <button type="submit" name="submit">Submit</button>
             </form>
         </div>
 
         </div> <%
+        String tag = "name=\"info\"";
         if (request.getAttribute("Account") != null) {
             String acc_name = (String) request.getAttribute("Account");
             Double acc_balance = (Double) request.getAttribute("Balance");
 
             if (acc_balance != null) {
-                out.println("Account: " + acc_name);
-                out.println("Balance:" + acc_balance);
-            } else out.println("<p>There is no " + acc_name + " account yet!</p>");}
+                out.println("<p " + tag + ">Account: " + acc_name);
+                out.println("Balance:" + acc_balance + "</p>");
+            } else out.println("<p " + tag + ">There is no " + acc_name + " account yet!</p>");}
     %>
 
 </div>

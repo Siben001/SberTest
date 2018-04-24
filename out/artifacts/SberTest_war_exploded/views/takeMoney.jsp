@@ -31,29 +31,29 @@
                 <label>Sum for taking:
                     <input type="float" name="sum"><br />
                 </label>
-                <button type="submit">Submit</button>
+                <button type="submit" name="submit">Submit</button>
             </form>
         </div>
 
     </div> <%
-
+    String tag = "name=\"info\"";
     if (request.getAttribute("Account") != null) {
         String acc_name = (String) request.getAttribute("Account");
         if (request.getAttribute("Error") != null) {
             Integer err_num = (Integer) request.getAttribute("Error");
             if (err_num == 1){
-                out.println("<p>There is no " + acc_name + " account yet!</p>");
+                out.println("<p " + tag + ">There is no " + acc_name + " account yet!</p>");
             }else {
-                out.println("<p>Please, input sum in format: 123.3</p>");
+                out.println("<p " + tag + ">Please, input sum in format: 123.3</p>");
             }
         }
         else {
             Double acc_balance = (Double) request.getAttribute("Balance");
 
                 if (acc_balance >= 0) {
-                    out.println("Account: " + acc_name);
-                    out.println("Balance:" + acc_balance);}
-                else out.println("<p>There is not enough money on " + acc_name + " account!</p>");}}
+                    out.println("<p " + tag + ">Account: " + acc_name);
+                    out.println("Balance:" + acc_balance + "</p>");}
+                else out.println("<p " + tag + ">There is not enough money on " + acc_name + " account!</p>");}}
 %>
 
 </div>

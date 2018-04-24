@@ -33,18 +33,19 @@
                 <label>Sum for taking:
                     <input type="float" name="sum"><br />
                 </label>
-                <button type="submit">Submit</button>
+                <button type="submit" name="submit">Submit</button>
             </form>
         </div>
 
     </div> <%
+    String tag = "name=\"info\"";
         if (request.getAttribute("Error") != null) {
             Integer err_num = (Integer) request.getAttribute("Error");
             if (err_num == 1){
                 String acc_name = (String) request.getAttribute("Account");
-                out.println("<p>There is no " + acc_name + " account yet!</p>");
+                out.println("<p " + tag + ">There is no " + acc_name + " account yet!</p>");
             }else {
-                out.println("<p>Please, input sum in format: 123.3</p>");
+                out.println("<p " + tag + ">Please, input sum in format: 123.3</p>");
             }
         }
         else {
@@ -52,11 +53,11 @@
                 Account acc_from = (Account) request.getAttribute("Account_from");
                 Account acc_to = (Account) request.getAttribute("Account_to");
                 if (acc_from.getBalance() >= 0){
-                    out.println("Account: " + acc_from.getName());
+                    out.println("<p " + tag + ">Account: " + acc_from.getName());
                     out.println("New Balance:" + acc_from.getBalance());
                     out.println("Account: " + acc_to.getName());
-                    out.println("New Balance:" + acc_to.getBalance());}
-                    else {out.println("<p>There is not enough money on " + acc_from.getName() + " account!</p>");
+                    out.println("New Balance:" + acc_to.getBalance() + "</p>");}
+                    else {out.println("<p " + tag + ">There is not enough money on " + acc_from.getName() + " account!</p>");
             }}}
 %>
 

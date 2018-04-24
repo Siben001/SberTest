@@ -26,14 +26,15 @@
             <label>AccountName:
                 <input type="text" name="account_name"><br />
             </label>
-            <button type="submit">Submit</button>
+            <button type="submit" name="submit">Submit</button>
         </form>
     </div>
     <%
+        String tag = "name=\"info\"";
         if (request.getAttribute("Error") != null){
-            out.println("<p>Account '" + request.getAttribute("Account") + "' is not exist!</p>");
+            out.println("<p " + tag + ">Account '" + request.getAttribute("Account") + "' is not exist!</p>");
         } else if (request.getAttribute("Account") != null) {
-            out.println("<p>Account '" + request.getAttribute("Account") + "' deleted!</p>");
+            out.println("<p " + tag + ">Account '" + request.getAttribute("Account") + "' deleted!</p>");
         }
     %>
 </div>

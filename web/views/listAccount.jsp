@@ -23,14 +23,14 @@
             <h2>Accounts</h2>
         </div> <%
         List<Account> acc = (List<Account>) request.getAttribute("Accounts");
-
+        String tag = "name=\"info\"";
         if (acc != null && !acc.isEmpty()) {
-            out.println("<ui>");
+            out.println("<ui name=\"acc_list\">");
             for (Account a : acc) {
                 out.println("<li>" + a.getName() + "</li>");
             }
             out.println("</ui>");
-        } else out.println("<p>There is no accounts yet!</p>");
+        } else out.println("<p " + tag + ">There is no accounts yet!</p>");
     %>
     </div>
 </div>
