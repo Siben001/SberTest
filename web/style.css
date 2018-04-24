@@ -1,0 +1,29 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+aside {
+    background: rgb(67,150,57);
+    padding: 10px;
+    width: 150px;
+    float: left;
+    margin: 10px;
+    box-shadow: darkgreen;
+}
+label {
+    margin: 10px auto;
+}
+form {
+    margin: 10px;
+}
+
+input {
+    margin: 10px;
+}
+
+button {
+    background-color:rgb(67,150,57);
+    color: #F5F5F5;
+    border: 0;
+    margin: 5px 2px 2px 2px;
+    height: 25px;
+}

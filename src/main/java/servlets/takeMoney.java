@@ -24,20 +24,25 @@ public class takeMoney extends HttpServlet {
         try {
             req.setAttribute("Account", name);
             Double sum = Double.parseDouble(req.getParameter("sum"));
-            try {
-                BankModel bank = BankModel.getInstance();
-                Account acc = bank.takeMoney(name, sum);
-                if (acc == null){
-                    err_numb = 1;
-                }
-                else {
-                    req.setAttribute("Balance", acc.getBalance());
-                }
-                req.setAttribute("Error", err_numb);
+            if (sum < 0) {
+                req.setAttribute("Error", 3);
                 doGet(req, resp);
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+            else {
+                try {
+                    BankModel bank = BankModel.getInstance();
+                    Account acc = bank.takeMoney(name, sum);
+                    if (acc == null){
+                        err_numb = 1;
+                    }
+                    else {
+                        req.setAttribute("Balance", acc.getBalance());
+                    }
+                    req.setAttribute("Error", err_numb);
+                    doGet(req, resp);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }}
         } catch (Exception e)
         {
             req.setAttribute("Error", 2);

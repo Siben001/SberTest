@@ -25,28 +25,33 @@ public class moneyTransfer extends HttpServlet {
         try {
 
             Double sum = Double.parseDouble(req.getParameter("sum"));
-            try {
-                BankModel bank = BankModel.getInstance();
-                Account acc_from = bank.getAccountByName(name_from);
-                Account acc_to = bank.getAccountByName(name_to);
-                if (acc_from == null){
-                    err_numb = 1;
-                    req.setAttribute("Account", name_from);
-                }
-                else if (acc_to == null){
-                    err_numb = 1;
-                    req.setAttribute("Account", name_to);
-                }
-                else {
-                    List<Account> acc = bank.moneyTransfer(acc_from, acc_to, sum);
-                    req.setAttribute("Account_from", acc.get(0));
-                    req.setAttribute("Account_to", acc.get(1));
-                }
-                req.setAttribute("Error", err_numb);
+            if (sum < 0) {
+                req.setAttribute("Error", 3);
                 doGet(req, resp);
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+            else {
+                try {
+                    BankModel bank = BankModel.getInstance();
+                    Account acc_from = bank.getAccountByName(name_from);
+                    Account acc_to = bank.getAccountByName(name_to);
+                    if (acc_from == null){
+                        err_numb = 1;
+                        req.setAttribute("Account", name_from);
+                    }
+                    else if (acc_to == null){
+                        err_numb = 1;
+                        req.setAttribute("Account", name_to);
+                    }
+                    else {
+                        List<Account> acc = bank.moneyTransfer(acc_from, acc_to, sum);
+                        req.setAttribute("Account_from", acc.get(0));
+                        req.setAttribute("Account_to", acc.get(1));
+                    }
+                    req.setAttribute("Error", err_numb);
+                    doGet(req, resp);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }}
         } catch (Exception e)
         {
             req.setAttribute("Error", 2);

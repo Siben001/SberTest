@@ -8,14 +8,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link href="style.css" rel="stylesheet">
     <title>Add new user</title>
+    <link rel="import" href="../myMenu.html">
 </head>
 
 <body>
 <div>
     <h1>Bank</h1>
+    <hr>
 </div>
 
+<script>
+    var link = document.querySelector('link[rel=import]');
+    var content = link.import.querySelector('#_menu');
+    document.body.appendChild(content.cloneNode(true));
+</script>
 <div>
     <div>
         <div>
@@ -36,7 +44,11 @@
             Integer err_num = (Integer) request.getAttribute("Error");
             if (err_num == 1){
                 out.println("<p " + tag + ">Account '" + request.getAttribute("Account") + "' is already exist!</p>"); }
-                else{
+                else if (err_num == 4){
+                     out.println("<p " + tag + ">Account name can't start with whitespace!</p>"); }
+                else if (err_num == 5){
+                    out.println("<p " + tag + ">Account name can't end with whitespace!</p>"); }
+                else {
                     out.println("<p " + tag + ">Please, enter account name</p>");
                 }
         } else if (request.getAttribute("Account") != null) {

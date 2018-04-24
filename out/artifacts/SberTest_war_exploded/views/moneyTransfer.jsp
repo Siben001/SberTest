@@ -8,14 +8,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link href="style.css" rel="stylesheet">
     <title>Account</title>
+    <link rel="import" href="../myMenu.html">
 </head>
 
 <body>
 <div>
     <h1>Bank</h1>
+    <hr>
 </div>
-
+<script>
+    var link = document.querySelector('link[rel=import]');
+    var content = link.import.querySelector('#_menu');
+    document.body.appendChild(content.cloneNode(true));
+</script>
 <div>
     <div>
         <div>
@@ -44,7 +51,9 @@
             if (err_num == 1){
                 String acc_name = (String) request.getAttribute("Account");
                 out.println("<p " + tag + ">There is no " + acc_name + " account yet!</p>");
-            }else {
+            }else if (err_num == 3){
+                out.println("<p " + tag + ">Sum can't be less than 0!</p>");}
+            else {
                 out.println("<p " + tag + ">Please, input sum in format: 123.3</p>");
             }
         }

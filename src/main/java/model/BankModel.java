@@ -2,12 +2,9 @@ package model;
 
 import entities.Account;
 
-import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.TreeSet;
 
 public class BankModel {
     private List<Account> bank;
@@ -141,12 +138,18 @@ public class BankModel {
 
     public List<Account> moneyTransfer(Account acc_from, Account acc_to, Double sum) throws SQLException{
         List<Account> acc = new ArrayList<>();
-        acc_from = takeMoney(acc_from.getName(), sum);
-        acc.add(acc_from);
-        if (acc_from.getBalance() >= 0.0){
-            acc_to = addMoney(acc_to.getName(), sum);
+        if (acc_from.getName().equals(acc_to.getName()))
+        {
+            acc.add(acc_from);
+            acc.add(acc_to);
         }
-        acc.add(acc_to);
+        else {
+            acc_from = takeMoney(acc_from.getName(), sum);
+            acc.add(acc_from);
+            if (acc_from.getBalance() >= 0.0){
+                acc_to = addMoney(acc_to.getName(), sum);
+            }
+            acc.add(acc_to);}
         return acc;
     }
 

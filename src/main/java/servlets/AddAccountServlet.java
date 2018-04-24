@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class AddAccountServlet extends HttpServlet {
     @Override
@@ -27,16 +26,20 @@ public class AddAccountServlet extends HttpServlet {
                 req.setAttribute("Error", 2);
             }
             else {
-                Account acc = bank.getAccountByName(name);
-                if (acc == null){
-                    bank.addAccount(name);
-                } else{
-                    req.setAttribute("Error", 1);
-            }}
+                Boolean err = checkInput.checkInput(name, req);
+                if (!err){
+                    Account acc = bank.getAccountByName(name);
+                    if (acc == null){
+                        bank.addAccount(name);
+                    } else {
+                        req.setAttribute("Error", 1);
+            }}}
             req.setAttribute("Account", name);
             doGet(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
 }
